@@ -1,0 +1,109 @@
+<div class="container" id="main-container">
+    <div class="row">
+        <label for="phaseId" class="p-sr-only">廠</label>
+        <input class="mr-2 p-inputtext-lg" id="phaseId" type="text" pInputText placeholder="廠">
+
+        <label for="locId" class="p-sr-only">區</label>
+        <input class="mr-2 p-inputtext-lg" id="locId" type="text" pInputText placeholder="區">
+
+        <label for="matId" class="p-sr-only">料號</label>
+        <input class="mr-2 p-inputtext-lg" id="matId" type="text" pInputText placeholder="料號">
+
+        <label for="batchId" class="p-sr-only">批號</label>
+        <input class="mr-2 p-inputtext-lg" id="batchId" type="text" pInputText placeholder="批號">
+        <button pButton type="button" class="p-button-raised p-button-rounded p-button-sm">搜尋</button>
+        
+    </div>
+    <div class="row mt-5">
+        <button pButton type="button" label="新增" class="p-button-outlined p-button-secondary mr-2"(click)="onOpenModal(undefined, 'add')" ><i class="pi pi-plus mr-1" style="color: #607D8B;"></i></button>
+        <button pButton type="button" label="修改" class="p-button-outlined p-button-secondary mr-2" (click)="onOpenModal(undefined, 'edit')"><i class="pi pi-pencil mr-1" style="color: #607D8B;"></i></button>
+        <button pButton type="button" label="刪除" class="p-button-outlined p-button-secondary mr-2" (click)="confirmDelete()"><i class="pi pi-trash mr-1" style="color: #607D8B;"></i></button>
+        <p-fileUpload name="Upload" [customUpload]="true" (uploadHandler)="onUpload($event)" accept=".xlsx"></p-fileUpload>
+        
+        <button pButton type="button" label="上傳" class="p-button-outlined p-button-secondary mr-2"><i class="pi pi-arrow-up mr-1" style="color: #607D8B;"></i></button>
+    </div>
+    <p-confirmDialog width="445" acceptLabel="刪除"></p-confirmDialog>
+
+    <ag-grid-angular
+        style="width: 100%; height: 500px;"
+        class="ag-theme-alpine"
+        [gridOptions]="gridOptions"
+    >
+    </ag-grid-angular>
+
+</div>
+<!-- Add Employee Modal -->
+<div class="modal fade" id="addConfigModal" tabindex="-1" role="dialog" aria-labelledby="addConfigModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h5 class="modal-title" id="addConfigModalLabel">Add Config</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="modal-body">
+          <form #addForm="ngForm" (ngSubmit)="onAddConfig(addForm)" >
+          <div class="form-group">
+             <label for="phaseId">廠</label>
+             <input type="text" ngModel name="phaseId" class="form-control" id="phaseId" required>
+          </div>
+          <div class="form-group">
+             <label for="locId">區</label>
+             <input type="text" ngModel name="locId" class="form-control" id="locId" required>
+          </div>
+          <div class="form-group">
+             <label for="matId">料號</label>
+             <input type="text" ngModel name="matId" class="form-control" id="matId"  required>
+          </div>
+          <div class="form-group">
+             <label for="batchId">批號</label>
+             <input type="text" ngModel name="batchId" class="form-control" id="batchId" required>
+          </div>
+          <div class="modal-footer">
+             <button type="button" id="add-config-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+          </form>
+       </div>
+    </div>
+  </div>
+  </div>
+
+<!-- Edit Modal
+<div class="modal fade" id="updateConfigModal" tabindex="-1" role="dialog" aria-labelledby="updateConfigModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateConfigModalLabel">Edit Config</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+              <div class="form-group">
+                 <label for="phaseId">廠</label>
+                 <input type="text" ngModel="{{editConfig?.phaseId}}" name="phaseId" class="form-control" id="phaseId" aria-describedby="emailHelp">
+              </div>
+              <div class="form-group">
+                 <label for="locId">區</label>
+                 <input type="text" ngModel="{{editConfig?.locId}}" name="locId" class="form-control" id="locId">
+              </div>
+              <div class="form-group">
+                 <label for="matId">料號</label>
+                 <input type="text" ngModel="{{editConfig?.matId}}" name="matId" class="form-control" id="matId">
+              </div>
+              <div class="form-group">
+                 <label for="batchId">批號</label>
+                 <input type="text" ngModel="{{editConfig?.batchId}}" name="batchId" class="form-control" id="batchId">
+              </div>
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateConfig(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div> -->
