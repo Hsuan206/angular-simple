@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import { ConfirmationService } from 'primeng/api';
 import { Message } from 'primeng/api';
@@ -16,6 +16,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 export class MasterDataComponent implements OnInit {
+    @ViewChild('water') water: ElementRef;
+    @ViewChild('waterBefore') waterBefore: ElementRef;
+    @ViewChild('waterAfter') waterAfter: ElementRef;
+
+    maxValue: number = 0;
+    currValue: number = 0;
     // public editConfig: Config;
     configs: Config[];
     msgs: Message[] = [];
@@ -52,19 +58,19 @@ export class MasterDataComponent implements OnInit {
     constructor(private configService: ConfigService, private confirmationService: ConfirmationService) {
     }
     ngOnInit() {
-        this.configService.getConfigs().subscribe((response) => {
-            this.newRowData = response
-            // response.forEach(function(config){
-            //     Object.keys(config).forEach(function(key) {
-            //         config[key]
-            //     });
-            // })
-            // this.gridOptions.rowData = 
-        },
-            (error: HttpErrorResponse) => {
-                alert(error.message);
-            }
-        );
+        // this.configService.getConfigs().subscribe((response) => {
+        //     this.newRowData = response
+        //     // response.forEach(function(config){
+        //     //     Object.keys(config).forEach(function(key) {
+        //     //         config[key]
+        //     //     });
+        //     // })
+        //     // this.gridOptions.rowData = 
+        // },
+        //     (error: HttpErrorResponse) => {
+        //         alert(error.message);
+        //     }
+        // );
     }
     confirmDelete() {
         this.confirmationService.confirm({
@@ -117,5 +123,37 @@ export class MasterDataComponent implements OnInit {
         }
         if (container) container.appendChild(button);
         button.click();
+    }
+    drawCSS(){
+        let percent = this.currValue / this.maxValue;
+        if(percent <= 1){
+            this.water.nativeElement.style.height = `calc(300px * ${percent})`;
+            if(percent >= 0.7) {
+                this.water.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.5)';
+                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.2)';
+                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.7)';
+            }else if(percent >= 0.35){
+                this.water.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.5)';
+                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.2)';
+                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.7)';
+            }else{
+                this.water.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.5)';
+                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.2)';
+                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.7)';
+            }
+            if(percent >= 0.965) {
+                this.waterBefore.nativeElement.style.display = 'none';
+                this.water.nativeElement.style.borderTopLeftRadius = '48px';
+                this.water.nativeElement.style.borderTopRightRadius = '48px';
+            }else {
+                this.waterBefore.nativeElement.style.display = 'block';
+                this.water.nativeElement.style.borderTopLeftRadius = 'unset';
+                this.water.nativeElement.style.borderTopRightRadius = 'unset';
+                this.water.nativeElement.style.borderRadius = '50px/25px';
+            }
+        }else{
+            alert('剩餘量大於最大量')
+        }
+        console.log(percent);
     }
 }                                   

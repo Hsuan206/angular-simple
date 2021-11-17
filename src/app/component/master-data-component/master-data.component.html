@@ -14,11 +14,77 @@
         <button pButton type="button" class="p-button-raised p-button-rounded p-button-sm">搜尋</button>
         
     </div>
+    <div class="row">
+      <div class="col-md-3">
+         <!-- <p>最小壓力</p>
+         <input type="text" name="min" class="min-input" id="0"> -->
+         <p>最大量</p>
+         <input type="number" name="maxValue" value="0" [(ngModel)]="maxValue" id="1" (change)="drawCSS()">
+         <p>目前餘量</p>
+         <input type="number" name="currValue" value="0" [(ngModel)]="currValue" id="2" (change)="drawCSS()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+         <div #cylinderBefore class="cylinderBefore"></div>
+         <div class="cylinder-div">
+            <div class="cylinder">
+               <div class="cylinder-head"></div>
+               <div class="cylinder-bar"></div>
+               <!-- <div #cylinderBefore class="cylinderBefore"></div> -->
+               <div #water class="water">
+                  <div #waterBefore class="waterBefore"></div>
+                  <div #waterAfter class="waterAfter"></div>
+               </div>
+               <!-- <div #cylinderAfter class="cylinderAfter"></div> -->
+            </div>
+         </div>
+      </div>
+      <!-- <div class="col-md-3">
+         <div #cylinderBefore class="cylinderBefore"></div>
+         <div class="cylinder-div">
+            <div class="cylinder">
+               <div class="cylinder-head"></div>
+               <div class="cylinder-bar"></div>
+               <div #water class="water">
+                  <div #waterBefore class="waterBefore"></div>
+                  <div #waterAfter class="waterAfter"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div #cylinderBefore class="cylinderBefore"></div>
+         <div class="cylinder-div">
+            <div class="cylinder">
+               <div class="cylinder-head"></div>
+               <div class="cylinder-bar"></div>
+               <div #water class="water">
+                  <div #waterBefore class="waterBefore"></div>
+                  <div #waterAfter class="waterAfter"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-3">
+         <div #cylinderBefore class="cylinderBefore"></div>
+         <div class="cylinder-div">
+            <div class="cylinder">
+               <div class="cylinder-head"></div>
+               <div class="cylinder-bar"></div>
+               <div #water class="water">
+                  <div #waterBefore class="waterBefore"></div>
+                  <div #waterAfter class="waterAfter"></div>
+               </div>
+            </div>
+         </div>
+      </div> -->
+   </div>
     <div class="row mt-5">
         <button pButton type="button" label="新增" class="p-button-outlined p-button-secondary mr-2"(click)="onOpenModal(undefined, 'add')" ><i class="pi pi-plus mr-1" style="color: #607D8B;"></i></button>
         <button pButton type="button" label="修改" class="p-button-outlined p-button-secondary mr-2" (click)="onOpenModal(undefined, 'edit')"><i class="pi pi-pencil mr-1" style="color: #607D8B;"></i></button>
         <button pButton type="button" label="刪除" class="p-button-outlined p-button-secondary mr-2" (click)="confirmDelete()"><i class="pi pi-trash mr-1" style="color: #607D8B;"></i></button>
-        <p-fileUpload name="Upload" [customUpload]="true" (uploadHandler)="onUpload($event)" accept=".xlsx"></p-fileUpload>
+        <p-fileUpload name="Upload" [customUpload]="true" (uploadHandler)="onUpload($event)" accept=".csv,.xlsx"></p-fileUpload>
         
         <button pButton type="button" label="上傳" class="p-button-outlined p-button-secondary mr-2"><i class="pi pi-arrow-up mr-1" style="color: #607D8B;"></i></button>
     </div>

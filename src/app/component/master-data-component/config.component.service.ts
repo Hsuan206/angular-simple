@@ -29,8 +29,6 @@ class ConfigService {
     let formData:FormData = new FormData();    
     if(file != null){
       formData.append('Upload', file, file.name);
-      console.log(formData)
-      console.log(formData)
     }
 
     return this.http.post((`${this.apiServerUrl}/configs/upload`), formData);
