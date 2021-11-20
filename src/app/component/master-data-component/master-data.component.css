@@ -36,7 +36,7 @@ input {
 	/* overflow: hidden; */
 	margin: 0 auto;
 	width: 80px;
-	height: 300px;
+	height: 200px;
     border-radius: 50px/50px;
     /* border-top-left-radius: 100px 100px;
     border-top-right-radius: 100px 100px;
@@ -131,4 +131,21 @@ input {
 
 .water--90:checked ~ .cylinder .water {
 	height: calc(300px * 0.9);
+}
+
+.customer-badge.status-online {
+    background-color: #c8e6c9;
+    color: #256029;
+}
+.customer-badge.status-asr {
+    background-color: #b3e5fc;
+    color: #23547b;
+}
+.customer-badge {
+    border-radius: 2px;
+    padding: .25em .5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .3px;
 }

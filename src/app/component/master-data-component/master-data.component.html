@@ -19,27 +19,95 @@
          <!-- <p>最小壓力</p>
          <input type="text" name="min" class="min-input" id="0"> -->
          <p>最大量</p>
-         <input type="number" name="maxValue" value="0" [(ngModel)]="maxValue" id="1" (change)="drawCSS()">
-         <p>目前餘量</p>
-         <input type="number" name="currValue" value="0" [(ngModel)]="currValue" id="2" (change)="drawCSS()">
+         <input type="number" name="maxValue" value="0" [(ngModel)]="maxValue" id="1" (change)="drawCSS('all')">
+         <p>左邊目前餘量</p>
+         <input type="number" name="leftCurrValue" value="0" [(ngModel)]="leftCurrValue" id="2" (change)="drawCSS('left')">
+         <p>右邊目前餘量</p>
+         <input type="number" name="rightCurrValue" value="0" [(ngModel)]="rightCurrValue" id="3" (change)="drawCSS('right')">
       </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 100px;">
       <div class="col-md-3">
-         <div #cylinderBefore class="cylinderBefore"></div>
+         <div #leftCylinderBefore class="cylinderBefore"></div>
          <div class="cylinder-div">
             <div class="cylinder">
                <div class="cylinder-head"></div>
                <div class="cylinder-bar"></div>
                <!-- <div #cylinderBefore class="cylinderBefore"></div> -->
-               <div #water class="water">
-                  <div #waterBefore class="waterBefore"></div>
-                  <div #waterAfter class="waterAfter"></div>
+               <div #leftWater class="water">
+                  <div #leftWaterBefore class="waterBefore"></div>
+                  <div #leftWaterAfter class="waterAfter"></div>
                </div>
                <!-- <div #cylinderAfter class="cylinderAfter"></div> -->
             </div>
          </div>
       </div>
+      <div class="col-md-3">
+         <div #rightCylinderBefore class="cylinderBefore"></div>
+         <div class="cylinder-div">
+            <div class="cylinder">
+               <div class="cylinder-head"></div>
+               <div class="cylinder-bar"></div>
+               <!-- <div #cylinderBefore class="cylinderBefore"></div> -->
+               <div #rightWater class="water">
+                  <div #rightWaterBefore class="waterBefore"></div>
+                  <div #rightWaterAfter class="waterAfter"></div>
+               </div>
+               <!-- <div #cylinderAfter class="cylinderAfter"></div> -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+         <table class="table table-borderless text-center">
+            <thead>
+              <tr>
+                <th scope="col">平均用量</th>
+                <th scope="col">剩餘小時</th>
+                <th scope="col">瞬時用量</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1150</td>
+                <td>6.96</td>
+                <td>7500</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <br>
+      <div class="row">
+         <table class="table table-borderless text-center">
+            <tbody>
+              <tr>
+                <td><span class="customer-badge status-online">Online</span></td>
+                <td class="font-weight-bold">Status</td>
+                <td><span class="customer-badge status-asr">ASR</span></td>
+              </tr>
+              <tr>
+                <td>{{leftCurrValue}}</td>
+                <td class="font-weight-bold">鋼瓶餘量</td>
+                <td>{{rightCurrValue}}</td>
+              </tr>
+              <tr>
+                 <td>{{leftCurrValue}}</td>
+                 <td class="font-weight-bold">昨日消耗量</td>
+                 <td>{{rightCurrValue}}</td>
+              </tr>
+              <tr>
+               <td>11/18 15:27</td>
+               <td class="font-weight-bold">預計切邊時間</td>
+               <td>11/18 15:27</td>
+            </tr>
+            </tbody>
+          </table>
+
+      </div>
+    </div>
+   </div>
       <!-- <div class="col-md-3">
          <div #cylinderBefore class="cylinderBefore"></div>
          <div class="cylinder-div">
@@ -79,7 +147,6 @@
             </div>
          </div>
       </div> -->
-   </div>
     <div class="row mt-5">
         <button pButton type="button" label="新增" class="p-button-outlined p-button-secondary mr-2"(click)="onOpenModal(undefined, 'add')" ><i class="pi pi-plus mr-1" style="color: #607D8B;"></i></button>
         <button pButton type="button" label="修改" class="p-button-outlined p-button-secondary mr-2" (click)="onOpenModal(undefined, 'edit')"><i class="pi pi-pencil mr-1" style="color: #607D8B;"></i></button>

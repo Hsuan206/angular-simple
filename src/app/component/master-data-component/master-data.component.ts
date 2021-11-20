@@ -16,12 +16,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 export class MasterDataComponent implements OnInit {
-    @ViewChild('water') water: ElementRef;
-    @ViewChild('waterBefore') waterBefore: ElementRef;
-    @ViewChild('waterAfter') waterAfter: ElementRef;
+    @ViewChild('leftWater') leftWater: ElementRef;
+    @ViewChild('leftWaterBefore') leftWaterBefore: ElementRef;
+    @ViewChild('leftWaterAfter') leftWaterAfter: ElementRef;
+    @ViewChild('rightWater') rightWater: ElementRef;
+    @ViewChild('rightWaterBefore') rightWaterBefore: ElementRef;
+    @ViewChild('rightWaterAfter') rightWaterAfter: ElementRef;
 
     maxValue: number = 0;
-    currValue: number = 0;
+    leftCurrValue: number = 0;
+    rightCurrValue: number = 0;
     // public editConfig: Config;
     configs: Config[];
     msgs: Message[] = [];
@@ -124,36 +128,78 @@ export class MasterDataComponent implements OnInit {
         if (container) container.appendChild(button);
         button.click();
     }
-    drawCSS(){
-        let percent = this.currValue / this.maxValue;
+    leftCylinderChange(){
+        let percent = this.leftCurrValue / this.maxValue;
         if(percent <= 1){
-            this.water.nativeElement.style.height = `calc(300px * ${percent})`;
+            this.leftWater.nativeElement.style.height = `calc(200px * ${percent})`;
             if(percent >= 0.7) {
-                this.water.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.5)';
-                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.2)';
-                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.7)';
+                this.leftWater.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.5)';
+                this.leftWaterBefore.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.2)';
+                this.leftWaterAfter.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.7)';
             }else if(percent >= 0.35){
-                this.water.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.5)';
-                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.2)';
-                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.7)';
+                this.leftWater.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.5)';
+                this.leftWaterBefore.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.2)';
+                this.leftWaterAfter.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.7)';
             }else{
-                this.water.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.5)';
-                this.waterBefore.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.2)';
-                this.waterAfter.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.7)';
+                this.leftWater.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.5)';
+                this.leftWaterBefore.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.2)';
+                this.leftWaterAfter.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.7)';
             }
             if(percent >= 0.965) {
-                this.waterBefore.nativeElement.style.display = 'none';
-                this.water.nativeElement.style.borderTopLeftRadius = '48px';
-                this.water.nativeElement.style.borderTopRightRadius = '48px';
+                this.leftWaterBefore.nativeElement.style.display = 'none';
+                this.leftWater.nativeElement.style.borderTopLeftRadius = '48px';
+                this.leftWater.nativeElement.style.borderTopRightRadius = '48px';
             }else {
-                this.waterBefore.nativeElement.style.display = 'block';
-                this.water.nativeElement.style.borderTopLeftRadius = 'unset';
-                this.water.nativeElement.style.borderTopRightRadius = 'unset';
-                this.water.nativeElement.style.borderRadius = '50px/25px';
+                this.leftWaterBefore.nativeElement.style.display = 'block';
+                this.leftWater.nativeElement.style.borderTopLeftRadius = 'unset';
+                this.leftWater.nativeElement.style.borderTopRightRadius = 'unset';
+                this.leftWater.nativeElement.style.borderRadius = '50px/25px';
             }
         }else{
             alert('剩餘量大於最大量')
         }
         console.log(percent);
+    }
+    rightCylinderChange(){
+        let percent = this.rightCurrValue / this.maxValue;
+        if(percent <= 1){
+            this.rightWater.nativeElement.style.height = `calc(200px * ${percent})`;
+            if(percent >= 0.7) {
+                this.rightWater.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.5)';
+                this.rightWaterBefore.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.2)';
+                this.rightWaterAfter.nativeElement.style.backgroundColor = 'rgba(0, 160, 160, 0.7)';
+            }else if(percent >= 0.35){
+                this.rightWater.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.5)';
+                this.rightWaterBefore.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.2)';
+                this.rightWaterAfter.nativeElement.style.backgroundColor = 'rgba(119, 113, 25, 0.7)';
+            }else{
+                this.rightWater.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.5)';
+                this.rightWaterBefore.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.2)';
+                this.rightWaterAfter.nativeElement.style.backgroundColor = 'rgba(233, 29, 29, 0.7)';
+            }
+            if(percent >= 0.965) {
+                this.rightWaterBefore.nativeElement.style.display = 'none';
+                this.rightWater.nativeElement.style.borderTopLeftRadius = '48px';
+                this.rightWater.nativeElement.style.borderTopRightRadius = '48px';
+            }else {
+                this.rightWaterBefore.nativeElement.style.display = 'block';
+                this.rightWater.nativeElement.style.borderTopLeftRadius = 'unset';
+                this.rightWater.nativeElement.style.borderTopRightRadius = 'unset';
+                this.rightWater.nativeElement.style.borderRadius = '50px/25px';
+            }
+        }else{
+            alert('剩餘量大於最大量')
+        }
+        console.log(percent);
+    }
+    drawCSS(position: string){
+        if(position==='left') {
+            this.leftCylinderChange();
+        }else if(position==='right'){
+            this.rightCylinderChange();
+        }else{
+            this.leftCylinderChange();
+            this.rightCylinderChange();
+        }
     }
 }                                   
